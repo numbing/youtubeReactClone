@@ -6,7 +6,6 @@ import VideoList from './components/video_list'
 import VideoDetail from './components/video_detail'
 
 
-
 const API_KEY = 'AIzaSyDu3ULXjhGO0V-cEk5nmwrZWw1VrHp2IlA';
 
 class App extends Component {
@@ -17,7 +16,12 @@ class App extends Component {
             selectedVideo: null
 
         };
-        YTSearch({key: API_KEY, term: 'surfboards'}, (videos) => {
+        this.videoSearch('surfboards');
+
+    }
+
+    videoSearch(term) {
+        YTSearch({key: API_KEY, term: term}, (videos) => {
             this.setState({
                 videos: videos,
                 selectedVideo: videos[0]
@@ -29,9 +33,9 @@ class App extends Component {
         return (
             <div className="App">
 
-                <Search/>
+                <Search onSearch={term => this.videoSearch(term)}/>
                 <VideoDetail video={this.state.selectedVideo}/>
-                <VideoList onVideoSelect={selectedVideo=> this.setState({selectedVideo})} videos={this.state.videos}/>
+                <VideoList onVideoSelect={selectedVideo => this.setState({selectedVideo})} videos={this.state.videos}/>
             </div>
         );
     }
