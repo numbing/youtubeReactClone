@@ -28,3 +28,6 @@
 .list-group-item:hover {
     background-color: #eee;
 }
+body{
+    background: linear-gradient(black, darkgray);
+}
